@@ -17,11 +17,13 @@
     <div class="measure-label">NUMBER OF CARS SOLD DAILY</div>
 </div>
 <div class="section">
-    <div class="button active">Weekly</div>
-    <div class="button">Monthly</div>
-    <div class="calendar">21-27 Aug</div>
+    <div class="sold-daily-button button active" data-calendar-date="21-27 Aug"
+         data-src="./img/chart-image-1.png">Weekly</div>
+    <div class="sold-daily-button button" data-calendar-date="August"
+         data-src="./img/monthly-graph-1.png">Monthly</div>
+    <div class="calendar sold-daily-calendar">21-27 Aug</div>
 </div>
-<img class="chart-image" src="./img/chart-image-1.png"/>
+<img class="chart-image sold-daily-chart" src="./img/chart-image-1.png"/>
 <a>View our distributors network</a>
 <div class="gray-section">
     <div class="gray-section-header">Top seller:</div>
@@ -34,16 +36,21 @@
         </select>
     </div>
     <div class="select float-right">
-        <select>
-            <option>Passenger car</option>
-            <option>Commercial vehicles</option>
-            <option>Motorcycles</option>
+        <select onchange="$('.transport-image').attr('src', this.options[this.selectedIndex].getAttribute('data-src'));
+                $('.transport-name').text(this.options[this.selectedIndex].getAttribute('data-car-name'));
+                $('.transport-sales-number').text(this.options[this.selectedIndex].getAttribute('data-transport-sales-number'));">
+            <option data-src="./img/cars/porsche-911.png" data-car-name="Porsche 911"
+                    data-transport-sales-number="1,674,634">Passenger car</option>
+            <option data-src="./img/cars/lorry.png" data-car-name="Commercial vehicle"
+                    data-transport-sales-number="3,324,123">Commercial vehicles</option>
+            <option data-src="./img/cars/motorbike.png" data-car-name="Motorcycle"
+                    data-transport-sales-number="6,423,123">Motorcycles</option>
         </select>
     </div>
     <div class="transport-container">
         <img class="transport-image" src="./img/cars/porsche-911.png"/>
         <div class="transport-name">Porsche 911</div>
-        <div class="transport-sales">1,674,634 sales</div>
+        <div class="transport-sales"><span class="transport-sales-number">1,674,634</span> sales</div>
     </div>
 </div>
 <a>View complete production catalogue</a>
@@ -52,17 +59,25 @@
     <div class="measure-label">NUMBER OF CARS MANUFACTURED DAILY</div>
 </div>
 <div class="section">
-    <div class="button active">Weekly</div>
-    <div class="button">Monthly</div>
-    <div class="calendar">21-27 Aug</div>
+    <div class="manufactured-daily-button button active" data-calendar-date="21-27 Aug"
+         data-src="./img/chart-image-2.png">Weekly</div>
+    <div class="manufactured-daily-button button" data-calendar-date="August"
+         data-src="./img/monthly-graph-1.png">Monthly</div>
+    <div class="manufactured-daily-calendar calendar">21-27 Aug</div>
 </div>
-<img class="chart-image" src="./img/chart-image-2.png"/>
+<img class="chart-image manufactured-daily-chart" src="./img/chart-image-2.png"/>
 <div class="gray-section">
     <div class="gray-section-header-centre">
         A brand new
         <div class="select">
-            <select>
-                <option>Passenger car</option>
+            <select onchange="$('.assemble-car-image').attr('src', this.options[this.selectedIndex].getAttribute('data-src'));
+                $('.assemble-car-time').text(this.options[this.selectedIndex].getAttribute('data-assemble-car-time'));">
+                <option data-src="./img/cars/passenger-car.png"
+                        data-assemble-car-time="45:12">Passenger car</option>
+                <option data-src="./img/cars/lorry.png"
+                        data-assemble-car-time="35:45">Commercial vehicles</option>
+                <option data-src="./img/cars/motorbike.png"
+                        data-assemble-car-time="51:32">Motorcycles</option>
             </select>
         </div>
     </div>
@@ -78,23 +93,40 @@
     <div class="section-header-centre">
         To assemble a
         <div class="select">
-            <select>
+            <select onchange="$('.employees-number').text(Math.floor((Math.random() * 100) + 1));">
                 <option>Passenger car</option>
+                <option>Commercial vehicles</option>
+                <option>Motorcycles</option>
             </select>
         </div>
         in
         <div class="select small">
-            <select>
+            <select onchange="$('.employees-number').text(Math.floor((Math.random() * 100) + 1));">
+                <option>All times</option>
                 <option>2017</option>
+                <option>2016</option>
+                <option>2015</option>
             </select>
         </div>
     </div>
     <img class="team-icon" src="./img/team-icon.png">
     <div class="team-slogan">we need a team of</div>
-    <div class="team-slogan-big">4 EMPLOYEES</div>
+    <div class="team-slogan-big"><span class="employees-number">4</span> EMPLOYEES</div>
 </div>
 <footer>KCM Automotors © 2017</footer>
 
 <script src="jquery-3.2.1.min.js"></script>
+<script>
+    $('.sold-daily-button').on('click', function () {
+        $('.sold-daily-button.active').removeClass('active');$(this).addClass('active');
+        $('.sold-daily-calendar').text($(this).attr('data-calendar-date'));
+        $('.sold-daily-chart').attr('src', $(this).attr('data-src'));
+    });
+    $('.manufactured-daily-button').on('click', function () {
+        $('.manufactured-daily-button.active').removeClass('active');$(this).addClass('active');
+        $('.manufactured-daily-calendar').text($(this).attr('data-calendar-date'));
+        $('.manufactured-daily-chart').attr('src', $(this).attr('data-src'));
+    });
+</script>
 </body>
 </html>
